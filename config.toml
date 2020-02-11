@@ -1,4 +1,4 @@
-theme = "noteworthy"
+theme = ["noteworthy"]
 
 languageCode = "en-us"
 title = "0x7CC"
