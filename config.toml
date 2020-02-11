@@ -6,6 +6,7 @@ title = "0x7CC"
 enableRobotsTXT = true
 summaryLength = 20 # Configure how long the post summary should be on the homepage.
 
+
 [author]
 	name = "Brennan"
 
