@@ -13,7 +13,7 @@ summaryLength = 20 # Configure how long the post summary should be on the homepa
 [params]
 	math = true
 	# Blog description at the top of the homepage. Supports markdown.
-	description = "Noteworthy is a minimalist Hugo theme, perfect for writers and bloggers."
+	description = "Travel, Food, Tech, and Geodesy!"
 
     # Main
     email = "emailto:brennan.mcdonald.mail@gmail.com"
