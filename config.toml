@@ -16,20 +16,20 @@ summaryLength = 20 # Configure how long the post summary should be on the homepa
 	# Blog description at the top of the homepage. Supports markdown.
 	description = "Travel, Food, Tech, and Geodesy!"
 
-    # Main
-    email = "emailto:brennan.mcdonald.mail@gmail.com"
-    twitter = "https://twitter.com/bmickeydonald"
-    instagram = "https://instagram.com/brennanmcd"
-    linkedin = "https://linkedin.com/in/brennan-mcdonald"
+  # Main
+  email = "emailto:brennan.mcdonald.mail@gmail.com"
+  twitter = "https://twitter.com/bmickeydonald"
+  instagram = "https://instagram.com/brennanmcd"
+  linkedin = "https://linkedin.com/in/brennan-mcdonald"
 
-    # Programming
-    github = "https://github.com/brennanmcdonald"
+  # Programming
+  github = "https://github.com/brennanmcdonald"
 
-    # Add your Disqus shortname here.
-    disqusShortname = ""      
+  # Add your Disqus shortname here.
+  disqusShortname = ""      
 
-    # Add your Google Analytics identifier: UA-XXXXXXXX-X
-    googleAnalytics = "" 
+  # Add your Google Analytics identifier: UA-XXXXXXXX-X
+  googleAnalytics = "" 
 
 # Menu links along the sidebar navigation.
 [[menu.main]]
