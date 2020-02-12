@@ -1,6 +1,8 @@
 ---
 title: "My Facination with Micro-Infrastructure and Mini-Cities"
 date: 2020-02-11
+tag: ["infrastructure", "city", "planning", "worldbuilding", "weird"]
+category: [“hobbies”]
 ---
 
 
