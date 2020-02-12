@@ -1,5 +1,6 @@
 theme = ["noteworthy"]
 
+baseURL = "https://blog.brennanmcdonald.ca/"
 languageCode = "en-us"
 title = "0x7CC"
 
