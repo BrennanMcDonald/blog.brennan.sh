@@ -2,9 +2,17 @@
 title: "My Facination with Micro-Infrastructure and Mini-Cities"
 date: 2020-02-11
 tags: ["infrastructure", "city", "planning", "world building", "weird"]
-category: [“hobbies”]
+category: “hobbies”
+summary: "Often I find it hard to describe some of my weirder fascinations and hobbies. For examplem I find geodetic markers, strange geographical artifacts, and the math that links them fascinating. Luckily for me, geodesy and geography have titles and are fairly easy to describe."
 ---
 
+- [Micro-Infrastructure](#micro-infrastructure)
+  - [Compact living spaces](#compact-living-spaces)
+- [Mini-Cities](#mini-cities)
+  - [Kowloon Walled City](#kowloon-walled-city)
+  - [Univeristy Campuses](#univeristy-campuses)
+  - [Indoor emulated cities](#indoor-emulated-cities)
+- [Wrapping it up](#wrapping-it-up)
 
 Often I find it hard to describe some of my weirder fascinations and hobbies. For examplem I find [geodetic markers](https://en.wikipedia.org/wiki/Survey_marker), strange geographical artifacts, and the math that links them fascinating. Luckily for me, geodesy and geography have titles and are fairly easy to describe. When I get giddy over the [geodetic datum origin of Japan](https://ridgelineimages.com/maps/geodetic-datum-origin-japan/), it's fairly easy to find more about it because there are keywords I can use to get hits on Google. However, not all of the things that excite me like geodesy are easy to describe. 
 
