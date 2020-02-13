@@ -8,4 +8,4 @@ Hi! I'm Brennan McDonald, a 4th year computer science student studying at the Un
 
 This blog is going to simply be my shouting my thoughts into the void with the hope of improving my writing skills and picking up a few listeners along the way. I intend on talking about anything that comes to my mind and I hope that I can hit a topic that interestes a few people.
 
-If you want to read more about me, feel free to visit my homepage at https://brennanmcdonald.ca
+If you want to read more about me, feel free to visit my homepage at https://brennanmcdonald.ca.
