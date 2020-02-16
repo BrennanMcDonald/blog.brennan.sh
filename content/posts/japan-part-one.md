@@ -2,7 +2,6 @@
 title: "New Years 2019 in Japan: Part One."
 date: 2020-02-16T00:00:01
 tags: ["japan", "tokyo", "travel", "photo biography"]
-draft: false
 category: “travel”
 summary: "I spent New Years 2019 in Tokyo, Japan as a rather spur of the moment travel decision. While there I fell in love with the food and made some great friends. Now over a year later, Im finally writing something about it."
 ---
