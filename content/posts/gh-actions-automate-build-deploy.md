@@ -16,19 +16,27 @@ summary: "Github Actions are a relativey new feature that was put in place to he
   - [Runner](#runner)
   - [Actions](#actions)
     - [Checkout Action](#checkout-action)
-    - [Custom Actions](#custom-actions)
+    - [Third Party Actions](#third-party-actions)
+    - [Custom Actions (Run)](#custom-actions-run)
 
 ## Introduction
 
-Github Actions are a relativey new feature that was put in place to help people run CI/CD workflows directly from Github Repos. In my opinion, if you host your code on Github, they are the cleanest and fastest free form of CI/CD out there today.
+Github Actions are a relativey new feature that was put in place to help people run CI/CD workflows directly from Github Repos. In my opinion, if you host your code on Github, they are the cleanest and fastest free form of CI/CD out there today. To access the actions for a Github repo, navigate to the repo's page and click on the "Actions" tab at the top.
+
+![tabs](/img/gh-action-build-deploy/tabs.PNG)
+
+Here you can check the status of existing workflows, and by clicking the new workflow button you can deploy an existing template or a blank workflow file.
+
+![Sections of a workflow](/img/gh-action-build-deploy/new_workflow.PNG)
+
 
 ## Elements of a Github actions workflow
 
-Here we have an overview of the actions involved in a workflow and the layout that they occur in.
+Github actions are `yaml` files that live in the `.github/workflows` folder.  Here we have an overview of the actions involved in a workflow and the layout that they occur in.
 
 ![Sections of a workflow](/img/gh-action-build-deploy/sections.png)
 
-The core of a Github action workflow is a yaml file. There are hundreds of possible keys that exist to be used in this YAML file. However, today were only going to focus on the few important ones that are required for a basicly setup. We can start with the name for our workflow, it can be anything so don't worry about what you put here.
+The core of a Github action workflow is a `yaml` file. There are hundreds of possible keys that exist to be used in this `YAML` file. However, today were only going to focus on the few important ones that are required for a basicly setup. We can start with the name for our workflow, it can be anything so don't worry about what you put here.
 
 
 ```yaml
@@ -40,7 +48,7 @@ name: Build and Deploy
 
 The trigger is the action that tells your workflow to run. This can be anything from pushing to a branch, cron events, or even webhook events. More on actions can be found [here](https://help.github.com/en/actions/reference/events-that-trigger-workflows). For the sake of this guide, we will be using a _**push to branch**_ action, in specific we will be triggering our event on a push to the master branch. This is done by using the following 4 lines of code. 
 
-``` yaml
+```yaml
 on:
   push:
     branches:
@@ -78,6 +86,35 @@ Actions are denoted by the `setps:` key, which is followed by a list of groups o
 
 #### Checkout Action
 
+In a build-deploy setup, the checkout action is typically the first step that our workflow will do. The checkout action fetches the most recent version of the repo. This action is provided by github on the 'actions' organization. It is important to note that there are two versions of the checkout action provided by github actions. The key difference is that v1 supports checking out submodules.
+
+```yaml
+- uses: actions/checkout@v1
+  with:
+    submodules: true
+```
 
 
-#### Custom Actions
+#### Third Party Actions
+
+Other actions can be importated from other people's github repositories. By using the `uses:` key, you can specify a repo that will be pulled, built, and run during a workflow. These actions can take arguments by using the `with:` key, which takes a list of key-value pairs similar to envionment variables. For example, deploying a built static page to github pages, we can use `JamesIves/github-pages-deploy-action@releases/v3` like below:
+
+```yaml
+- name: Deploy
+  uses: JamesIves/github-pages-deploy-action@releases/v3
+  with:
+    ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+    BRANCH: gh-pages
+    FOLDER: dist
+```
+
+We name the custom action "Deploy" and say we will be using the `JamesIves/github-pages-deploy-action@releases/v3` action. Then by passing 3 arguments of `BRANCH`, `FOLDER`, and `ACCESS_TOKEN`, we can specify the behaviour of the action.
+
+#### Custom Actions (Run)
+
+You can also specify custom bash commands using the `run:` key.
+
+```yaml
+- run: npm install
+- run: npm run build --if-present
+```
