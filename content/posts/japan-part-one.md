@@ -74,4 +74,4 @@ My next few days were quiet during the day and busy at night, I spend my days wa
 
 Hatsumode is the New Years celeberation in Japan that is celebrated amongst families. It is defined as the first shrine visit of the year and is incredibly popular amongst Japanese. I was looking for a place to go, I debated visiting Meji Jingu shrine however I ended up taking a train, getting off at a random stop, and vising a shrine there. 
 
-[Continue Reading...](http://localhost:1313/posts/japan-part-two/)
+[Continue Reading...](/posts/japan-part-two/)
