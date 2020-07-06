@@ -21,7 +21,7 @@ summary: "Github Actions are a relativey new feature that was put in place to he
 
 ## Introduction
 
-Github Actions are a relativey new feature that was put in place to help people run CI/CD workflows directly from Github Repos. In my opinion, if you host your code on Github, they are the cleanest and fastest free form of CI/CD out there today. To access the actions for a Github repo, navigate to the repo's page and click on the "Actions" tab at the top.
+Github Actions are a relatively new feature that was put in place to help people run CI/CD workflows directly from Github Repos. In my opinion, if you host your code on Github, they are the cleanest and fastest free form of CI/CD out there today. To access the actions for a Github repo, navigate to the repo's page and click on the "Actions" tab at the top.
 
 ![tabs](/img/gh-action-build-deploy/tabs.PNG)
 
