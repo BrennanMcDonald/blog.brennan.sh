@@ -2,5 +2,5 @@
 
 
 
-<div>My blog, built using the HUGO build system.</div>
+<div>My blog, built using the HUGO build system. Edited with gutenburg.</div>
 
