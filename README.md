@@ -4,9 +4,3 @@
 
 <div>My blog, built using the HUGO build system.</div>
 
-<br>
-
-<br>
-
-<br>
-
