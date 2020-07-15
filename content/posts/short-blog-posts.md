@@ -8,3 +8,7 @@
 
 <div>Then I found a post submitted to HackerNews. The post was maybe 500 words, two paragraphs, but the author conveyed their message efficiently. While I disagreed with the topic, I was still able to understand the authors message in these two paragraphs. The length of a post shouldn't determine it's quality, instead the contents of the post should speak for themselves. <br></div>
 
+<div><br></div>
+
+<div>From now on, on this blog, I wont concern myself with the length of a post. Instead I will worry about conveying my message with efficiency; And actually writing the posts I want to write.<br></div>
+
