@@ -1,3 +1,10 @@
+---
+title: "Your blog post can be short."
+date: 2020-07-14
+category: "writing"
+tags: ["meta", "hackernews", "writing"]
+---
+
 ## Your blog post can be short.
 
 I've been meaning to write several blog posts for a while, but despite having inspiration I've failed to produce any content in 5 months. I've been trying to write about a few topics I've been passionate about since the pandemic started with no avail. My posts always felt too short to qualify as a “blog post”, always feeling like I didn't have enough content to deliver or my research wasn't thorough enough.
