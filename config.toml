@@ -35,7 +35,7 @@ summaryLength = 20 # Configure how long the post summary should be on the homepa
 [[menu.main]]
   name = "My Personal Site"
   identifier = "homepage"
-  url = "https://brennanmcdonald.ca"
+  url = "https://brennan.sh"
 	weight = 1
   
 [[menu.main]]
