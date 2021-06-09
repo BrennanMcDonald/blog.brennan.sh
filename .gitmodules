@@ -4,3 +4,6 @@
 [submodule "themes/bento"]
 	path = themes/bento
 	url = https://github.com/leonardofaria/bento.git
+[submodule "themes/anatole"]
+	path = themes/anatole
+	url = https://github.com/lxndrblz/anatole.git
