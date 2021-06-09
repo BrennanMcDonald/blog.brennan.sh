@@ -1,4 +1,4 @@
-theme = ["bento"]
+theme = ["noteworthy"]
 
 baseURL = "https://blog.brennan.sh/"
 languageCode = "en-us"
