@@ -22,7 +22,6 @@ summaryLength = 20 # Configure how long the post summary should be on the homepa
 	description = "Travel, Food, Tech, and Geodesy!"
 
   # Main
-  email = "emailto:brennan.mcdonald.mail@gmail.com"
   twitter = "https://twitter.com/bmickeydonald"
   instagram = "https://instagram.com/brennanmcd"
   linkedin = "https://linkedin.com/in/brennan-mcdonald"
