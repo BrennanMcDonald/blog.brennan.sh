@@ -1,1 +1,79 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>algorithms on 0x7CC</title><link>https://blog.brennan.sh/tags/algorithms/</link><description>Recent content in algorithms on 0x7CC</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 19 Feb 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.brennan.sh/tags/algorithms/index.xml" rel="self" type="application/rss+xml"/><item><title>PtPMRR: Price to Performance Modified Round Robin.</title><link>https://blog.brennan.sh/posts/ptpmrr-whitepage/</link><pubDate>Wed, 19 Feb 2020 00:00:00 +0000</pubDate><guid>https://blog.brennan.sh/posts/ptpmrr-whitepage/</guid><description>Multi-cloud distributed task scheduling for cost and QoS optimization Cloud computing offers the ability to provision resources as required on a per-task basis.</description></item></channel></rss>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>algorithms on 0x7CC</title><link>https://blog.brennan.sh/tags/algorithms/</link><description>Recent content in algorithms on 0x7CC</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 19 Feb 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.brennan.sh/tags/algorithms/index.xml" rel="self" type="application/rss+xml"/><item><title>PtPMRR: Price to Performance Modified Round Robin.</title><link>https://blog.brennan.sh/posts/ptpmrr-whitepage/</link><pubDate>Wed, 19 Feb 2020 00:00:00 +0000</pubDate><guid>https://blog.brennan.sh/posts/ptpmrr-whitepage/</guid><description>&lt;h2 id="multi-cloud-distributed-task-scheduling-for-cost-and-qos-optimization">Multi-cloud distributed task scheduling for cost and QoS optimization&lt;/h2>
+&lt;p>Cloud computing offers the ability to provision resources as required on a per-task basis. Due to the growth of Cloud computing, there are many challenges faced today. One of these challenges is scheduling tasks to minimize cost in respect to runtime. Task scheduling is considered an NP hard problem with O(m*n) complexity when running n tasks on m resources.&lt;/p>
+&lt;p>In a multi-cloud scenario we still want to select the best resource to run a task on. However due to cost models that scale independently and the fact that measured performance that can vary from reported performance, this problem isn&amp;rsquo;t as simple as it sounds. Optimally we want our algorithm to select the resource that would run at the highest performance to cost ratio.&lt;/p>
+&lt;h2 id="proposed-algorithm">Proposed Algorithm&lt;/h2>
+&lt;p>The algorithm I am proposing is a modified scheduling algorithm that has been adapted to factor in the cost of a VM and it’s actual performance instead of the performance as reported by the cloud provider. The first step is to initialize a queue of all the tasks we want to run. We then start by building a cost to performance ratio for each machine that we want to run the current task on. After some variable initialization, we identify the highest performance to cost ratio. This will not specifically select the fastest or the cheapest machine, but the machine that will run the fastest for the lowest cost. We then identify the cloud provider that our selected VM is running on and attempt to schedule our task to that Virtual Machine. In the case that the scheduling fails, we attempt to reschedule.&lt;/p>
+&lt;pre>&lt;code>let Q = A queue of all tasks to run
+let n = the # of VMs across all clouds
+let ETC(i,j) = The expected runtime of Task i on VM j
+let CPMS(j) = The cost per ms of runtime on VM j
+let M = Total # of clouds
+While Q != null
+i &amp;lt;- dequeue(Q)
+for j = 1,2,3, ... , n
+RtC(i,j) = ETC(i,j)/CPMS(j)
+endfor
+maximum = RtC(i,1)
+index = 1
+for j = 2,3,4, ... , n
+if maximum &amp;lt; RtC(i,j)
+maximum = RtC(i,j)
+index = j
+endif
+endfor
+for k = 1,2,3, ... , M
+if index virtual machine is delpoyed under a cloud k
+SCHEDULE(i,k,index)
+while the task is not schedulable
+RESCHEDULE(i,k,index)
+endwhile
+endif
+endfor
+endwhile
+&lt;/code>&lt;/pre>&lt;h3 id="etc-formula">ETC Formula&lt;/h3>
+&lt;p>&lt;img src="https://blog.brennan.sh/img/ptpmrr/etc_formula.png" alt="alt text" title="Logo Title Text 2">&lt;/p>
+&lt;h2 id="implemenetation">Implemenetation&lt;/h2>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#66d9ef">while&lt;/span>&lt;span style="color:#f92672">(!&lt;/span>taskQueue&lt;span style="color:#f92672">.&lt;/span>&lt;span style="color:#a6e22e">isEmpty&lt;/span>&lt;span style="color:#f92672">())&lt;/span> &lt;span style="color:#f92672">{&lt;/span>
+List&lt;span style="color:#f92672">&amp;lt;&lt;/span>CloudProviderVM&lt;span style="color:#f92672">&amp;gt;&lt;/span> VMList &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> ArrayList&lt;span style="color:#f92672">&amp;lt;&amp;gt;(&lt;/span>VMs&lt;span style="color:#f92672">);&lt;/span>
+&lt;span style="color:#66d9ef">int&lt;/span> n &lt;span style="color:#f92672">=&lt;/span> VMList&lt;span style="color:#f92672">.&lt;/span>&lt;span style="color:#a6e22e">size&lt;/span>&lt;span style="color:#f92672">();&lt;/span>
+&lt;span style="color:#66d9ef">int&lt;/span> M &lt;span style="color:#f92672">=&lt;/span> CloudProviders&lt;span style="color:#f92672">.&lt;/span>&lt;span style="color:#a6e22e">size&lt;/span>&lt;span style="color:#f92672">();&lt;/span>
+Task t &lt;span style="color:#f92672">=&lt;/span> taskQueue&lt;span style="color:#f92672">.&lt;/span>&lt;span style="color:#a6e22e">remove&lt;/span>&lt;span style="color:#f92672">();&lt;/span>
+&lt;span style="color:#66d9ef">double&lt;/span> maximum &lt;span style="color:#f92672">=&lt;/span> calculateRtC&lt;span style="color:#f92672">(&lt;/span>t&lt;span style="color:#f92672">,&lt;/span> VMs&lt;span style="color:#f92672">.&lt;/span>&lt;span style="color:#a6e22e">get&lt;/span>&lt;span style="color:#f92672">(&lt;/span>0&lt;span style="color:#f92672">));&lt;/span>
+&lt;span style="color:#66d9ef">int&lt;/span> index &lt;span style="color:#f92672">=&lt;/span> 0&lt;span style="color:#f92672">;&lt;/span>
+&lt;span style="color:#66d9ef">for&lt;/span>&lt;span style="color:#f92672">(&lt;/span>&lt;span style="color:#66d9ef">int&lt;/span> j &lt;span style="color:#f92672">=&lt;/span> 1&lt;span style="color:#f92672">;&lt;/span> j &lt;span style="color:#f92672">&amp;lt;=&lt;/span> n&lt;span style="color:#f92672">;&lt;/span> j&lt;span style="color:#f92672">++)&lt;/span> &lt;span style="color:#f92672">{&lt;/span>
+&lt;span style="color:#66d9ef">double&lt;/span> current &lt;span style="color:#f92672">=&lt;/span> calculateRtC&lt;span style="color:#f92672">(&lt;/span>t&lt;span style="color:#f92672">,&lt;/span> VMs&lt;span style="color:#f92672">.&lt;/span>&lt;span style="color:#a6e22e">get&lt;/span>&lt;span style="color:#f92672">(&lt;/span>j&lt;span style="color:#f92672">));&lt;/span>
+&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#f92672">(&lt;/span>maximum &lt;span style="color:#f92672">&amp;lt;&lt;/span> current&lt;span style="color:#f92672">)&lt;/span> &lt;span style="color:#f92672">{&lt;/span>
+maximum &lt;span style="color:#f92672">=&lt;/span> current&lt;span style="color:#f92672">;&lt;/span>
+index &lt;span style="color:#f92672">=&lt;/span> j&lt;span style="color:#f92672">;&lt;/span>
+&lt;span style="color:#f92672">}&lt;/span>
+&lt;span style="color:#f92672">}&lt;/span>
+&lt;span style="color:#66d9ef">boolean&lt;/span> success &lt;span style="color:#f92672">=&lt;/span> schedule&lt;span style="color:#f92672">(&lt;/span>VMList&lt;span style="color:#f92672">.&lt;/span>&lt;span style="color:#a6e22e">get&lt;/span>&lt;span style="color:#f92672">(&lt;/span>index&lt;span style="color:#f92672">),&lt;/span> t&lt;span style="color:#f92672">);&lt;/span>
+&lt;span style="color:#66d9ef">while&lt;/span>&lt;span style="color:#f92672">(!&lt;/span>success&lt;span style="color:#f92672">)&lt;/span> &lt;span style="color:#f92672">{&lt;/span>
+VMList&lt;span style="color:#f92672">.&lt;/span>&lt;span style="color:#a6e22e">remove&lt;/span>&lt;span style="color:#f92672">(&lt;/span>VMList&lt;span style="color:#f92672">.&lt;/span>&lt;span style="color:#a6e22e">get&lt;/span>&lt;span style="color:#f92672">(&lt;/span>index&lt;span style="color:#f92672">));&lt;/span>
+index &lt;span style="color:#f92672">=&lt;/span> 0&lt;span style="color:#f92672">;&lt;/span>
+maximum &lt;span style="color:#f92672">=&lt;/span> calculateRtC&lt;span style="color:#f92672">(&lt;/span>t&lt;span style="color:#f92672">,&lt;/span> VMs&lt;span style="color:#f92672">.&lt;/span>&lt;span style="color:#a6e22e">get&lt;/span>&lt;span style="color:#f92672">(&lt;/span>0&lt;span style="color:#f92672">));&lt;/span>
+&lt;span style="color:#66d9ef">for&lt;/span>&lt;span style="color:#f92672">(&lt;/span>&lt;span style="color:#66d9ef">int&lt;/span> j &lt;span style="color:#f92672">=&lt;/span> 1&lt;span style="color:#f92672">;&lt;/span> j &lt;span style="color:#f92672">&amp;lt;=&lt;/span> n&lt;span style="color:#f92672">;&lt;/span> j&lt;span style="color:#f92672">++)&lt;/span> &lt;span style="color:#f92672">{&lt;/span>
+&lt;span style="color:#66d9ef">double&lt;/span> current &lt;span style="color:#f92672">=&lt;/span> calculateRtC&lt;span style="color:#f92672">(&lt;/span>t&lt;span style="color:#f92672">,&lt;/span> VMList&lt;span style="color:#f92672">.&lt;/span>&lt;span style="color:#a6e22e">get&lt;/span>&lt;span style="color:#f92672">(&lt;/span>j&lt;span style="color:#f92672">));&lt;/span>
+&lt;span style="color:#66d9ef">if&lt;/span> &lt;span style="color:#f92672">(&lt;/span>maximum &lt;span style="color:#f92672">&amp;lt;&lt;/span> current&lt;span style="color:#f92672">)&lt;/span> &lt;span style="color:#f92672">{&lt;/span>
+maximum &lt;span style="color:#f92672">=&lt;/span> current&lt;span style="color:#f92672">;&lt;/span>
+index &lt;span style="color:#f92672">=&lt;/span> j&lt;span style="color:#f92672">;&lt;/span>
+&lt;span style="color:#f92672">}&lt;/span>
+&lt;span style="color:#f92672">}&lt;/span>
+success &lt;span style="color:#f92672">=&lt;/span> schedule&lt;span style="color:#f92672">(&lt;/span>VMList&lt;span style="color:#f92672">.&lt;/span>&lt;span style="color:#a6e22e">get&lt;/span>&lt;span style="color:#f92672">(&lt;/span>index&lt;span style="color:#f92672">),&lt;/span> t&lt;span style="color:#f92672">);&lt;/span>
+&lt;span style="color:#f92672">}&lt;/span>
+&lt;span style="color:#f92672">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="experimental-parameters">Experimental Parameters&lt;/h2>
+&lt;p>A large selection of algorithms to schedule tasks currently exist. I will be comparing my proposed algorithm to these algorithms to test its performance.&lt;/p>
+&lt;p>I will experiment with this algorithm first on CloudSim to get a working model and then scale it to run on the three main cloud providers, amazon, google, and microsoft.&lt;/p>
+&lt;p>CloudSim set up to simulate cloud federation using three instances with 200 cloudlets each.
+Practical testing will use machines on their respective clouds.&lt;/p>
+&lt;p>Cloud 1 : (2X) Google Cloud n1-standard-1 (1 vCPU, 3.75GB RAM)&lt;br>
+Cloud 2 : (2X) AWS a1.medium (1 vCPU, 2GB RAM)&lt;br>
+Cloud 3 : (2X) Azure DS1 v2 (2 vCPU, 3.5GB RAM)&lt;/p>
+&lt;h2 id="results">Results&lt;/h2>
+&lt;p>By using this algorithm, costs were reduced by up to 20%&lt;/p>
+&lt;p>&lt;img src="https://blog.brennan.sh/img/ptpmrr/Figure_4.png" alt="alt text" title="Cost">&lt;/p>
+&lt;p>Cpu Usage remained mostly the same&lt;/p>
+&lt;p>&lt;img src="https://blog.brennan.sh/img/ptpmrr/Figure_5.png" alt="alt text" title="CPU usage">&lt;/p>
+&lt;p>Makespan scaled with the traditional round robin and smallest job first, however due to the naive nature of first come first serve it scaled much better than the other algorithms compared to.&lt;/p>
+&lt;p>&lt;img src="https://blog.brennan.sh/img/ptpmrr/Figure_6.png" alt="alt text" title="Makespan">&lt;/p></description></item></channel></rss>

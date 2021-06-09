@@ -1,1 +1,214 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>github on 0x7CC</title><link>https://blog.brennan.sh/tags/github/</link><description>Recent content in github on 0x7CC</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 15 Feb 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.brennan.sh/tags/github/index.xml" rel="self" type="application/rss+xml"/><item><title>Using Github Actions to Automate Build and Deploy.</title><link>https://blog.brennan.sh/posts/gh-actions-automate-build-deploy/</link><pubDate>Sat, 15 Feb 2020 00:00:00 +0000</pubDate><guid>https://blog.brennan.sh/posts/gh-actions-automate-build-deploy/</guid><description>Github Actions are a relativey new feature that was put in place to help people run CI/CD workflows directly from Github Repos. In my opinion, if you host your code on Github, they are the cleanest and fastest free form of CI/CD out there today.</description></item><item><title>How I Automated With Ease Using Github Actions.</title><link>https://blog.brennan.sh/posts/gh-actions-automation/</link><pubDate>Thu, 13 Feb 2020 00:00:00 +0000</pubDate><guid>https://blog.brennan.sh/posts/gh-actions-automation/</guid><description>About a week ago I decided to revamp my personal site and FINALLY get a working blog in order. Since you&amp;rsquo;re reading this obviously the blog half worked out! But as someone who has always had a relative interest in DevOps and more recently started putting that intesrest into motion, I thought I would use this opportunity to enhance my skills in CI/CD</description></item></channel></rss>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>github on 0x7CC</title><link>https://blog.brennan.sh/tags/github/</link><description>Recent content in github on 0x7CC</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 15 Feb 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.brennan.sh/tags/github/index.xml" rel="self" type="application/rss+xml"/><item><title>Using Github Actions to Automate Build and Deploy.</title><link>https://blog.brennan.sh/posts/gh-actions-automate-build-deploy/</link><pubDate>Sat, 15 Feb 2020 00:00:00 +0000</pubDate><guid>https://blog.brennan.sh/posts/gh-actions-automate-build-deploy/</guid><description>&lt;ul>
+&lt;li>&lt;a href="#introduction">Introduction&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#elements-of-a-github-actions-workflow">Elements of a Github actions workflow&lt;/a>
+&lt;ul>
+&lt;li>&lt;a href="#trigger">Trigger&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#runner">Runner&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#actions">Actions&lt;/a>
+&lt;ul>
+&lt;li>&lt;a href="#checkout-action">Checkout Action&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#third-party-actions">Third Party Actions&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#custom-actions-run">Custom Actions (Run)&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="introduction">Introduction&lt;/h2>
+&lt;p>Github Actions are a relatively new feature that was put in place to help people run CI/CD workflows directly from Github Repos. In my opinion, if you host your code on Github, they are the cleanest and fastest free form of CI/CD out there today. To access the actions for a Github repo, navigate to the repo&amp;rsquo;s page and click on the &amp;ldquo;Actions&amp;rdquo; tab at the top.&lt;/p>
+&lt;p>&lt;img src="https://blog.brennan.sh/img/gh-action-build-deploy/tabs.PNG" alt="tabs">&lt;/p>
+&lt;p>Here you can check the status of existing workflows, and by clicking the new workflow button you can deploy an existing template or a blank workflow file.&lt;/p>
+&lt;p>&lt;img src="https://blog.brennan.sh/img/gh-action-build-deploy/new_workflow.PNG" alt="Sections of a workflow">&lt;/p>
+&lt;h2 id="elements-of-a-github-actions-workflow">Elements of a Github actions workflow&lt;/h2>
+&lt;p>Github actions are &lt;code>yaml&lt;/code> files that live in the &lt;code>.github/workflows&lt;/code> folder. Here we have an overview of the actions involved in a workflow and the layout that they occur in.&lt;/p>
+&lt;p>&lt;img src="https://blog.brennan.sh/img/gh-action-build-deploy/sections.png" alt="Sections of a workflow">&lt;/p>
+&lt;p>The core of a Github action workflow is a &lt;code>yaml&lt;/code> file. There are hundreds of possible keys that exist to be used in this &lt;code>YAML&lt;/code> file. However, today were only going to focus on the few important ones that are required for a basicly setup. We can start with the name for our workflow, it can be anything so don&amp;rsquo;t worry about what you put here.&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Build and Deploy&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="trigger">Trigger&lt;/h3>
+&lt;p>The trigger is the action that tells your workflow to run. This can be anything from pushing to a branch, cron events, or even webhook events. More on actions can be found &lt;a href="https://help.github.com/en/actions/reference/events-that-trigger-workflows">here&lt;/a>. For the sake of this guide, we will be using a &lt;em>&lt;strong>push to branch&lt;/strong>&lt;/em> action, in specific we will be triggering our event on a push to the master branch. This is done by using the following 4 lines of code.&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#f92672">on&lt;/span>:
+&lt;span style="color:#f92672">push&lt;/span>:
+&lt;span style="color:#f92672">branches&lt;/span>:
+- &lt;span style="color:#ae81ff">master&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>This reads fairly cleanly so I wont explain it too much, but the root key is the &lt;code>on:&lt;/code> key which says the following lines will define our trigger. We then have the &lt;code>push:&lt;/code> key which says that the trigger will be an &lt;em>&lt;strong>on push&lt;/strong>&lt;/em> trigger. Finally we have the &lt;code>branches:&lt;/code> key which lists the branches we want our trigger to listen on. This can be any list of branches. For example, if we want this action to be for a pre-deploy envionment we can trigger on pushes to development branches.&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#f92672">on&lt;/span>:
+&lt;span style="color:#f92672">push&lt;/span>:
+&lt;span style="color:#f92672">branches&lt;/span>:
+- &lt;span style="color:#ae81ff">alpha&lt;/span>
+- &lt;span style="color:#ae81ff">beta&lt;/span>
+- &lt;span style="color:#ae81ff">staging&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="runner">Runner&lt;/h3>
+&lt;p>The runner is the host OS that our workflow will be running on. Due to the fact that Github Actions use &lt;a href="https://www.docker.com/resources/what-container">docker containers&lt;/a> under the covers, we have to specify what we want that container to run.&lt;/p>
+&lt;p>At the time of writing this post, there are four available runners. One for Windows, two for Ubuntu Linux, and one for macOS.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Virtual environment&lt;/th>
+&lt;th>YAML workflow label&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Windows Server 2019&lt;/td>
+&lt;td>&lt;code>windows-latest&lt;/code> or &lt;code>windows-2019&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Ubuntu 18.04&lt;/td>
+&lt;td>&lt;code>ubuntu-latest&lt;/code> or &lt;code>ubuntu-18.04&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Ubuntu 16.04&lt;/td>
+&lt;td>&lt;code>ubuntu-16.04&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>macOS Catalina 10.15&lt;/td>
+&lt;td>&lt;code>macos-latest&lt;/code> or &lt;code>macos-10.15&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>In this guide, we&amp;rsquo;re going to use the &lt;code>ubuntu-16.04&lt;/code> (however the process would be the same with any of the Ubuntu runners) image as it&amp;rsquo;ll be the easiest to use for our build process.&lt;/p>
+&lt;h3 id="actions">Actions&lt;/h3>
+&lt;p>Actions are denoted by the &lt;code>setps:&lt;/code> key, which is followed by a list of groups of keys as illustrated in the image at the top of this page. Actions are the bulk of a github actions workflow. They describe the actions that will be executed in the workflow, from checking out the code, to running the actual build process, to deploying. We&amp;rsquo;re going to spend some time learning&lt;/p>
+&lt;h4 id="checkout-action">Checkout Action&lt;/h4>
+&lt;p>In a build-deploy setup, the checkout action is typically the first step that our workflow will do. The checkout action fetches the most recent version of the repo. This action is provided by github on the &amp;lsquo;actions&amp;rsquo; organization. It is important to note that there are two versions of the checkout action provided by github actions. The key difference is that v1 supports checking out submodules.&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">- &lt;span style="color:#f92672">uses&lt;/span>: &lt;span style="color:#ae81ff">actions/checkout@v1&lt;/span>
+&lt;span style="color:#f92672">with&lt;/span>:
+&lt;span style="color:#f92672">submodules&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="third-party-actions">Third Party Actions&lt;/h4>
+&lt;p>Other actions can be importated from other people&amp;rsquo;s github repositories. By using the &lt;code>uses:&lt;/code> key, you can specify a repo that will be pulled, built, and run during a workflow. These actions can take arguments by using the &lt;code>with:&lt;/code> key, which takes a list of key-value pairs similar to envionment variables. For example, deploying a built static page to github pages, we can use &lt;code>JamesIves/github-pages-deploy-action@releases/v3&lt;/code> like below:&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">- &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Deploy&lt;/span>
+&lt;span style="color:#f92672">uses&lt;/span>: &lt;span style="color:#ae81ff">JamesIves/github-pages-deploy-action@releases/v3&lt;/span>
+&lt;span style="color:#f92672">with&lt;/span>:
+&lt;span style="color:#f92672">ACCESS_TOKEN&lt;/span>: &lt;span style="color:#ae81ff">${{ secrets.ACCESS_TOKEN }}&lt;/span>
+&lt;span style="color:#f92672">BRANCH&lt;/span>: &lt;span style="color:#ae81ff">gh-pages&lt;/span>
+&lt;span style="color:#f92672">FOLDER&lt;/span>: &lt;span style="color:#ae81ff">dist&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>We name the custom action &amp;ldquo;Deploy&amp;rdquo; and say we will be using the &lt;code>JamesIves/github-pages-deploy-action@releases/v3&lt;/code> action. Then by passing 3 arguments of &lt;code>BRANCH&lt;/code>, &lt;code>FOLDER&lt;/code>, and &lt;code>ACCESS_TOKEN&lt;/code>, we can specify the behaviour of the action.&lt;/p>
+&lt;h4 id="custom-actions-run">Custom Actions (Run)&lt;/h4>
+&lt;p>You can also specify custom bash commands using the &lt;code>run:&lt;/code> key.&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">- &lt;span style="color:#f92672">run&lt;/span>: &lt;span style="color:#ae81ff">npm install&lt;/span>
+- &lt;span style="color:#f92672">run&lt;/span>: &lt;span style="color:#ae81ff">npm run build --if-present&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>How I Automated With Ease Using Github Actions.</title><link>https://blog.brennan.sh/posts/gh-actions-automation/</link><pubDate>Thu, 13 Feb 2020 00:00:00 +0000</pubDate><guid>https://blog.brennan.sh/posts/gh-actions-automation/</guid><description>&lt;ul>
+&lt;li>&lt;a href="#introduction">Introduction&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#building-my-workflows">Building my workflows&lt;/a>
+&lt;ul>
+&lt;li>&lt;a href="#hugo">Hugo&lt;/a>
+&lt;ul>
+&lt;li>&lt;a href="#trigger">Trigger&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#checkout-action">Checkout Action&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#setup-hugo-action">Setup Hugo Action&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#build-action">Build Action&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#github-pages-deploy">Github Pages Deploy&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;a href="#react-native">React Native&lt;/a>
+&lt;ul>
+&lt;li>&lt;a href="#setup-action">Setup Action&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#build-action-1">Build Action&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;a href="#conclusion">Conclusion&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="introduction">Introduction&lt;/h2>
+&lt;h4 id="this-is-a-narritave-on-my-personal-use-case-if-you-want-a-guide-on-how-to-automate-click-herepostsgh-actions-automate-build-deploy----omit-in-toc---">&lt;a href="https://blog.brennan.sh/posts/gh-actions-automate-build-deploy">This is a narritave on my personal use case. If you want a guide on how to automate: click here&lt;/a> &lt;!-- raw HTML omitted -->&lt;/h4>
+&lt;p>About a week ago I decided to revamp my personal site and &lt;em>FINALLY&lt;/em> get a working blog in order. Since you&amp;rsquo;re reading this the blog half obviously worked out! (Spoiler alert: so did the website half). But as someone who has always had an interest in code automation, and more recently someone who has started to expariment with it, I thought I would use this opportunity to enhance my skills in &lt;a href="https://en.wikipedia.org/wiki/Continuous_integration">continous integration&lt;/a> and &lt;a href="https://en.wikipedia.org/wiki/Continuous_delivery">continuous delivery&lt;/a>.&lt;/p>
+&lt;p>&lt;img src="https://blog.brennan.sh/img/gh-action-build-deploy/ci-cd.png" alt="model of the CI/CD methodology">&lt;/p>
+&lt;p>Before I thought about my build and deploy process, I had to think about the technologies I wanted to use to build the projects themselves. For the website I went with NodeJS using the React framework. I picked React due to the fact that it&amp;rsquo;s the framework i&amp;rsquo;m most comfortable with and I would be able to write it most efficiently. As for the blog, I have history using Hugo to build static sites. Hugo is a framework that is efficient at generating static html for blogs. It seemed like the best framework for the job.&lt;/p>
+&lt;h2 id="building-my-workflows">Building my workflows&lt;/h2>
+&lt;h3 id="hugo">Hugo&lt;/h3>
+&lt;p>For my hugo workflow, I used a mix of built in and user created actions. The workflow is triggered by a code push to the master branch of the repo. I&amp;rsquo;m going to show the entire yaml file and then step through it, line-by-line.&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">HUGO Build and Deploy&lt;/span>
+&lt;span style="color:#f92672">on&lt;/span>:
+&lt;span style="color:#f92672">push&lt;/span>:
+&lt;span style="color:#f92672">branches&lt;/span>:
+- &lt;span style="color:#ae81ff">master&lt;/span>
+&lt;span style="color:#f92672">jobs&lt;/span>:
+&lt;span style="color:#f92672">build-deploy&lt;/span>:
+&lt;span style="color:#f92672">runs-on&lt;/span>: &lt;span style="color:#ae81ff">ubuntu-18.04&lt;/span>
+&lt;span style="color:#f92672">steps&lt;/span>:
+- &lt;span style="color:#f92672">uses&lt;/span>: &lt;span style="color:#ae81ff">actions/checkout@v1&lt;/span>
+&lt;span style="color:#f92672">with&lt;/span>:
+&lt;span style="color:#f92672">submodules&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+- &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Setup Hugo&lt;/span>
+&lt;span style="color:#f92672">uses&lt;/span>: &lt;span style="color:#ae81ff">peaceiris/actions-hugo@v2&lt;/span>
+&lt;span style="color:#f92672">with&lt;/span>:
+&lt;span style="color:#f92672">hugo-version&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;0.62.2&amp;#39;&lt;/span>
+- &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Build&lt;/span>
+&lt;span style="color:#f92672">run&lt;/span>: &lt;span style="color:#ae81ff">hugo --minify&lt;/span>
+- &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Deploy&lt;/span>
+&lt;span style="color:#f92672">uses&lt;/span>: &lt;span style="color:#ae81ff">JamesIves/github-pages-deploy-action@releases/v3&lt;/span>
+&lt;span style="color:#f92672">with&lt;/span>:
+&lt;span style="color:#f92672">ACCESS_TOKEN&lt;/span>: &lt;span style="color:#ae81ff">${{ secrets.ACTIONS_DEPLOY_KEY }}&lt;/span>
+&lt;span style="color:#f92672">BRANCH&lt;/span>: &lt;span style="color:#ae81ff">gh-pages&lt;/span>
+&lt;span style="color:#f92672">FOLDER&lt;/span>: &lt;span style="color:#ae81ff">public&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>Walking through this, section by section we can see the breakdown of the workflow logic.&lt;/p>
+&lt;h4 id="trigger">Trigger&lt;/h4>
+&lt;p>It all starts with a very simple trigger that builds on a push to the master. Since this project isn&amp;rsquo;t fast moving, I can have the building of the static files driven by the event of a push. However if I were to be pushing raidly to this repo, I might decide to schedule a nightly build instead.&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#f92672">on&lt;/span>:
+&lt;span style="color:#f92672">push&lt;/span>:
+&lt;span style="color:#f92672">branches&lt;/span>:
+- &lt;span style="color:#ae81ff">master&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>Im going to skip the runner because there isn&amp;rsquo;t much to say about selecting ubuntu as the base image that I used.&lt;/p>
+&lt;h4 id="checkout-action">Checkout Action&lt;/h4>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">- &lt;span style="color:#f92672">uses&lt;/span>: &lt;span style="color:#ae81ff">actions/checkout@v1&lt;/span>
+&lt;span style="color:#f92672">with&lt;/span>:
+&lt;span style="color:#f92672">submodules&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>Her we have my first action, the checkout action. If you&amp;rsquo;re familiar with github actions it should be simple enough to identify what this does. Essentially, this action pulls the most recent code base on the master branch and places it in our workflow&amp;rsquo;s container.&lt;/p>
+&lt;p>Something of note here, I have to use the checkout V1 module becasue the V2 module does not yet support submodules, which is required by this project because my theme is a &lt;a href="https://github.com/BrennanMcDonald/hugo-theme-noteworthy">seperate git repo&lt;/a> and i&amp;rsquo;ve included it as a submodule in the themes folder.&lt;/p>
+&lt;h4 id="setup-hugo-action">Setup Hugo Action&lt;/h4>
+&lt;p>The next action is a great action from &lt;a href="https://github.com/peaceiris">peaceiris&lt;/a>, which interstingly enough is written in &lt;a href="https://www.typescriptlang.org/">TypeScript&lt;/a>, that simply pulls the latest hugo version and installs it on the workflow&amp;rsquo;s runner image.&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">- &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Setup Hugo&lt;/span>
+&lt;span style="color:#f92672">uses&lt;/span>: &lt;span style="color:#ae81ff">peaceiris/actions-hugo@v2&lt;/span>
+&lt;span style="color:#f92672">with&lt;/span>:
+&lt;span style="color:#f92672">hugo-version&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;0.62.2&amp;#39;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="build-action">Build Action&lt;/h4>
+&lt;p>Thanks to the simplicity of hugo&amp;rsquo;s build system, an image isn&amp;rsquo;t necessary for this step, all we need to do is run the &lt;code>hugo&lt;/code> command in our working directory and we have liftoff.&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">- &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Build&lt;/span>
+&lt;span style="color:#f92672">run&lt;/span>: &lt;span style="color:#ae81ff">hugo --minify&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="github-pages-deploy">Github Pages Deploy&lt;/h4>
+&lt;p>Finally, once we&amp;rsquo;ve build hugo, we&amp;rsquo;ll need to deploy. In this case im deploying to github pages because im fairly fond of it and use it for a few other projects already (may as well put all the eggs in one basket eh?). This action is a little more technical so i&amp;rsquo;ll take a walk through what is going on under the covers.&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">- &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Deploy&lt;/span>
+&lt;span style="color:#f92672">uses&lt;/span>: &lt;span style="color:#ae81ff">JamesIves/github-pages-deploy-action@releases/v3&lt;/span>
+&lt;span style="color:#f92672">with&lt;/span>:
+&lt;span style="color:#f92672">ACCESS_TOKEN&lt;/span>: &lt;span style="color:#ae81ff">${{ secrets.ACTIONS_DEPLOY_KEY }}&lt;/span>
+&lt;span style="color:#f92672">BRANCH&lt;/span>: &lt;span style="color:#ae81ff">gh-pages&lt;/span>
+&lt;span style="color:#f92672">FOLDER&lt;/span>: &lt;span style="color:#ae81ff">public&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>Here we&amp;rsquo;re pulling &lt;a href="https://github.com/JamesIves/">JamesIves&amp;rsquo;s&lt;/a> well used &lt;em>&lt;strong>github-pages-deploy-action&lt;/strong>&lt;/em> action. We also have our first use of a &lt;a href="https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets">secret&lt;/a> in this workflow. In this case, that secret is my github personal access token which is used for copying my build artifacts (the html files) to the gh-pages branch and setting up the Github Pages settings.&lt;/p>
+&lt;p>The core of this action is the &lt;code>git&lt;/code> cli which is orchestrated wiht a couple TypeScript files. The two other arguments in this action are fairly straightforward, &lt;code>BRANCH:&lt;/code> is the selected branch we are going to be pushing our build code to, and &lt;code>FOLDER:&lt;/code> is the folder whos content will be pushed to the specified branch.&lt;/p>
+&lt;h3 id="react-native">React Native&lt;/h3>
+&lt;p>This set of actions is similar to the previous example with two main differences, the setup and build actions.&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Node.js CI&lt;/span>
+&lt;span style="color:#f92672">on&lt;/span>: [&lt;span style="color:#ae81ff">push]&lt;/span>
+&lt;span style="color:#f92672">jobs&lt;/span>:
+&lt;span style="color:#f92672">build&lt;/span>:
+&lt;span style="color:#f92672">runs-on&lt;/span>: &lt;span style="color:#ae81ff">ubuntu-latest&lt;/span>
+&lt;span style="color:#f92672">steps&lt;/span>:
+- &lt;span style="color:#f92672">uses&lt;/span>: &lt;span style="color:#ae81ff">actions/checkout@v2&lt;/span>
+- &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Build&lt;/span>
+&lt;span style="color:#f92672">uses&lt;/span>: &lt;span style="color:#ae81ff">actions/setup-node@v1&lt;/span>
+&lt;span style="color:#f92672">with&lt;/span>:
+&lt;span style="color:#f92672">node-version&lt;/span>: &lt;span style="color:#ae81ff">10.&lt;/span>&lt;span style="color:#ae81ff">x&lt;/span>
+- &lt;span style="color:#f92672">run&lt;/span>: &lt;span style="color:#ae81ff">npm install&lt;/span>
+- &lt;span style="color:#f92672">run&lt;/span>: &lt;span style="color:#ae81ff">npm run build --if-present&lt;/span>
+&lt;span style="color:#f92672">env&lt;/span>:
+&lt;span style="color:#f92672">CI&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+- &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Deploy&lt;/span>
+&lt;span style="color:#f92672">uses&lt;/span>: &lt;span style="color:#ae81ff">JamesIves/github-pages-deploy-action@releases/v3&lt;/span>
+&lt;span style="color:#f92672">with&lt;/span>:
+&lt;span style="color:#f92672">ACCESS_TOKEN&lt;/span>: &lt;span style="color:#ae81ff">${{ secrets.ACCESS_TOKEN }}&lt;/span>
+&lt;span style="color:#f92672">BRANCH&lt;/span>: &lt;span style="color:#ae81ff">gh-pages&lt;/span>
+&lt;span style="color:#f92672">FOLDER&lt;/span>: &lt;span style="color:#ae81ff">dist&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="setup-action">Setup Action&lt;/h4>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#f92672">uses&lt;/span>: &lt;span style="color:#ae81ff">actions/setup-node@v1&lt;/span>
+&lt;span style="color:#f92672">with&lt;/span>:
+&lt;span style="color:#f92672">node-version&lt;/span>: &lt;span style="color:#ae81ff">10.&lt;/span>&lt;span style="color:#ae81ff">x&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>The action we use for the NodeJS setup is provided by github under the &lt;a href="https://github.com/actions/">actions org&lt;/a>. This action uses a &lt;a href="https://github.com/actions/setup-node/blob/master/src/installer.ts">TypeScript installer&lt;/a> to set up NodeJS on the runner.&lt;/p>
+&lt;h4 id="build-action-1">Build Action&lt;/h4>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">- &lt;span style="color:#f92672">run&lt;/span>: &lt;span style="color:#ae81ff">npm install&lt;/span>
+- &lt;span style="color:#f92672">run&lt;/span>: &lt;span style="color:#ae81ff">npm run build --if-present&lt;/span>
+&lt;span style="color:#f92672">env&lt;/span>:
+&lt;span style="color:#f92672">CI&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>These two &lt;code>run:&lt;/code> lines execute two lines of &lt;code>npm cli&lt;/code> code. To NodeJS developers these should be self-explanitory, but for real developers: The first line installs all dependancies required for the build process, and the second one builds the code that is present in the working directory.&lt;/p>
+&lt;h2 id="conclusion">Conclusion&lt;/h2>
+&lt;p>I hope this has shed some light on how EASY automation with Github Actions is. I now have two files that I can drop into any React or HUGO project that will work. If you have any questions you think I can answer, feel free to reach out to me using the links to the left.&lt;/p></description></item></channel></rss>
