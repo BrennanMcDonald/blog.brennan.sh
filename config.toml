@@ -6,7 +6,7 @@ summarylength = 10
 enableEmoji = true
 enableRobotsTXT = true
 
-profilePicture = "logo.png"
+profilePicture = "/logo.png"
 title = "The Mind of John"
 author = "Brennan"
 #copyright = "2020-2021"
