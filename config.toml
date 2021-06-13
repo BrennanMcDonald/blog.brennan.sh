@@ -1,48 +1,49 @@
-baseURL = "https://blog.brennan.sh"
-languageCode = "en"
-DefaultContentLanguage = "en"
-theme = "anatole"
-summarylength = 10
+baseurl = "https://blog.brennan.sh"
+title = "The mind of Brennan"
+author = "Brennan McDonald"
+canonifyurls = true
+languagecode = "en"
+theme = "hugo-tanka"
+
 enableEmoji = true
-enableRobotsTXT = true
+hasCJKLanguage = false
+
+pygmentsstyle = "vs"
+pygmentscodefences = true
+
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_cache$", "\\.knit\\.md$", "\\.utf8\\.md$"]
 
 [params]
-profilePicture = "logo.png"
-title = "The Mind of John"
-author = "Brennan"
-#copyright = "2020-2021"
-description = "The Mind of John"
-keywords = ""
-mainSections = ["post"]
-doNotLoadAnimations = false
-singleDateFormat = "2/1/2006"
-indexDateFormat = "2/1/2006"
-listDateFormat = "2/1/2006"
+  sitename = "Hugo Tanka Theme"
+  faviconfile = "favicon.png"
+  highlightjs = true
+  highlightjslanguages = ["r", "python", "stan"]
+  uselatex = true
+  progressively = false
+# commentsrepo = "user/repo"
 
-## Math settings
-[math]
-enable = true  # options: true, false. Enable math support globally, default: false. You can always enable math on per page.
-use = "katex"  # options: "katex", "mathjax". default is "katex".
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
 
-## Social links
-# use 'fab' when brand icons, use 'fas' when standard solid icons.
-[[socialIcons]]
-icon = "fab fa-linkedin"
-title = "Linkedin"
-url = "https://linkedin.com/in/brennan-mcdonald"
-
-[[socialIcons]]
-icon = "fab fa-github"
-title = "GitHub"
-url = "https://github.com/brennanmcdonald"
-
-[[socialIcons]]
-icon = "fab fa-instagram"
-title = "instagram"
-url = "https://www.instagram.com/brennanmcd"
-
-[en]
-title = "The Mind of John"
-weight = 1
-LanguageName = "EN"
-contentDir = "content/english"
+[[menu.primary]]
+    name = "Home"
+    url = "/"
+    weight = 1
+[[menu.primary]]
+    name = "About"
+    url = "/about/"
+    weight = 2
+[[menu.primary]]
+    name = "GitHub"
+    url = "https://github.com/brennanmcdonald"
+    weight = 3
+[[menu.primary]]
+    name = "Twitter"
+    url = "https://twitter.com/bmickeydonald"
+    weight = 4
+[[menu.primary]]
+    name = "Linkedin"
+    url = "https://twitter.com/brennan-mcdonald"
+    weight = 5
