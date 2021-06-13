@@ -3,7 +3,7 @@ title = "The mind of Brennan"
 author = "Brennan McDonald"
 canonifyurls = true
 languagecode = "en"
-theme = "hugo-tanka"
+theme = "tanka"
 
 enableEmoji = true
 hasCJKLanguage = false

@@ -1,12 +1,4 @@
-[submodule "hugo-theme-noteworthy"]
-	path = themes/noteworthy
-	url = https://github.com/BrennanMcDonald/hugo-theme-noteworthy.git
-[submodule "themes/bento"]
-	path = themes/bento
-	url = https://github.com/leonardofaria/bento.git
-[submodule "themes/anatole"]
-	path = themes/anatole
-	url = https://github.com/lxndrblz/anatole.git
-[submodule "themes/hugo-tanka"]
+
+[submodule "themes/tanka"]
 	path = themes/hugo-tanka
 	url = https://github.com/nanxstats/hugo-tanka.git
