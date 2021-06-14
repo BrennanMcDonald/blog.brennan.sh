@@ -1,4 +1,4 @@
-baseurl = "https://blog.brennan.sh"
+baseurl = "https://blog.brennan.sh/"
 title = "The mind of Brennan"
 author = "Brennan McDonald"
 canonifyurls = true
