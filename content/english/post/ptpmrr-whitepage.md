@@ -2,6 +2,7 @@
 title: "PtPMRR: Price to Performance Modified Round Robin."
 date: 2020-02-19
 category: "technology"
+meta_img: img/ptpmrr/etc_formula.png
 tags: ["algorithms", "cloud", "automation", "devops","ci/cd" ]
 ---
 

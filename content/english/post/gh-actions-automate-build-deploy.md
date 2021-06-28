@@ -5,6 +5,7 @@ draft: false
 category: "technology"
 tags: ["github", "gh-actions", "automation", "devops","ci/cd" ]
 summary: "Github Actions are a relativey new feature that was put in place to help people run CI/CD workflows directly from Github Repos. In my opinion, if you host your code on Github, they are the cleanest and fastest free form of CI/CD out there today."
+meta_img: img/gh-action-build-deploy/tabs.PNG
 ---
 
 

@@ -14,13 +14,12 @@ pygmentscodefences = true
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_cache$", "\\.knit\\.md$", "\\.utf8\\.md$"]
 
 [params]
-  sitename = "Hugo Tanka Theme"
+  sitename = "The Mind of Brennan"
   faviconfile = "favicon.png"
   highlightjs = true
   highlightjslanguages = ["r", "python", "stan"]
   uselatex = true
   progressively = false
-# commentsrepo = "user/repo"
 
 [markup]
   [markup.goldmark]
