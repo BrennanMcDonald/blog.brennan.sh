@@ -26,7 +26,11 @@ summary: "About a week ago I decided to revamp my personal site and FINALLY get 
 
 About a week ago I decided to revamp my personal site and _FINALLY_ get a working blog in order. Since you're reading this the blog half obviously worked out! (Spoiler alert: so did the website half). But as someone who has always had an interest in code automation, and more recently someone who has started to expariment with it, I thought I would use this opportunity to enhance my skills in [continous integration](https://en.wikipedia.org/wiki/Continuous_integration) and [continuous delivery](https://en.wikipedia.org/wiki/Continuous_delivery).
 
+<div class="figure">
+
 ![model of the CI/CD methodology](/img/gh-action-build-deploy/ci-cd.png)
+
+</div>
 
 Before I thought about my build and deploy process, I had to think about the technologies I wanted to use to build the projects themselves. For the website I went with NodeJS using the React framework. I picked React due to the fact that it's the framework i'm most comfortable with and I would be able to write it most efficiently. As for the blog, I have history using Hugo to build static sites. Hugo is a framework that is efficient at generating static html for blogs. It seemed like the best framework for the job.
 

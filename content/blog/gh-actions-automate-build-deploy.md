@@ -24,18 +24,30 @@ meta_img: img/gh-action-build-deploy/tabs.PNG
 
 Github Actions are a relatively new feature that was put in place to help people run CI/CD workflows directly from Github Repos. In my opinion, if you host your code on Github, they are the cleanest and fastest free form of CI/CD out there today. To access the actions for a Github repo, navigate to the repo's page and click on the "Actions" tab at the top.
 
+<div class="figure">
+
 ![tabs](/img/gh-action-build-deploy/tabs.PNG)
+
+</div>
 
 Here you can check the status of existing workflows, and by clicking the new workflow button you can deploy an existing template or a blank workflow file.
 
+<div class="figure">
+
 ![Sections of a workflow](/img/gh-action-build-deploy/new_workflow.PNG)
+
+</div>
 
 
 ## Elements of a Github actions workflow
 
 Github actions are `yaml` files that live in the `.github/workflows` folder.  Here we have an overview of the actions involved in a workflow and the layout that they occur in.
 
+<div class="figure">
+
 ![Sections of a workflow](/img/gh-action-build-deploy/sections.png)
+
+</div>
 
 The core of a Github action workflow is a `yaml` file. There are hundreds of possible keys that exist to be used in this `YAML` file. However, today were only going to focus on the few important ones that are required for a basicly setup. We can start with the name for our workflow, it can be anything so don't worry about what you put here.
 

@@ -11,7 +11,11 @@ summary: "I spent New Years 2019 in Tokyo, Japan as a rather spur of the moment 
 
 Over the next few days I went to different shops, landmarks, and things that I saw online. Starting off the series of days with a visit to Tsukiji Fish Market and ate some of the the ever amazing Tuna Fish that it is famous for. From there I went off to start my adventures around Odaiba, an up-and-coming industrial/commercial section with massive buildings and a tonne of cool places to visit. Some of the cool places to visit are the Science Center, Team Labs Borderless, and the various statues and monuments. 
 
+<div class="figure">
+
 ![Hakone!](/img/japan/hakone.jpg)
+
+</div>
 
 The day after Odabia, I spent a day trip to visit the Tenzen Onsen in Hakone, Japan. Of all the destinations I visited during this trip, this day was easily the most interesting and the most authentic insight into the lives of native Japanese. For those who don't know, an Onsen is a communal Japanese bath house traditionally that was filled hot water funnelled from volcanic hot springs, high in mineral content, for people to bathe in. Along with the beauty of the Onsen, the surronding town of Hakone was very nice. I'm not sure but if I had to guess, this is a very "Resort" area as the shops and resturants felt like they were built for that cause.
 
@@ -24,7 +28,11 @@ The last few days I spent visiting other smaller destinations I wanted to hit as
 
 Taking the bullet train to Kyoto was an incredible experience, going 300mph on land is terrifying but oddly serene and calming. I also managed to snag a seat with a view of Mt. Fuji. Unfortunately it was a bit cloudy and this was the best view I could get.
 
+<div class="figure">
+
 ![Hakone!](/img/japan/fuji.png)
+
+</div>
 
 
 Due to my over-stay in Tokyo, I only got a few days to spend in Kyoto but I tried my best to make the time I had. Most of the time on the first day was spend walking between the major sights and sounds of Kyoto. From the Golden Palace, to the Fushimi Inari shrine, and the Gion. There isnt much else to be said about my time in Kyoto, except to visit a bar called Beer Bar Jive. 10/10
@@ -33,9 +41,33 @@ Due to my over-stay in Tokyo, I only got a few days to spend in Kyoto but I trie
 
 That wraps up my experiences in Japan, however here is a small gallery of all the food I got to enjoy.
 
+<div class="figure">
+
 ![Hakone!](/img/japan/food/curry.png)
+
+</div>
+<div class="figure">
+
 ![Hakone!](/img/japan/food/beef.png)
+
+</div>
+<div class="figure">
+
 ![Hakone!](/img/japan/food/pancakes.png)
+
+</div>
+<div class="figure">
+
 ![Hakone!](/img/japan/food/pastry.png)
+
+</div>
+<div class="figure">
+
 ![Hakone!](/img/japan/food/bun.png)
+
+</div>
+<div class="figure">
+
 ![Hakone!](/img/japan/food/takiyaki.png)
+
+</div>

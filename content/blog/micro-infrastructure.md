@@ -18,18 +18,24 @@ Often I find it hard to describe some of my weirder fascinations and hobbies. Fo
 
 ## Micro-Infrastructure
 
+<div class="figure">
 ![Example of a micro-infrastructure setting](/img/micro-infrastructure/image1.png)
+</div>
 
 This brings me to what I like to refer to as "Micro-Infrastructure". I define Micro-Infrastructure (which I will henceforth refer to as M.I.) as any set of systems that looks to maximize the functionality or utility of a space, in particular a relatively small space to that of its surroundings. What I mean by this is an area of buildings (commercial and residential), infrastructure, and routing between these services. In the first image, along the left is a series of shops and residences, all of which are interconnected via paths on both sides and elongated halls down the middle. The scale of the surrounding buildings is hard to view in the picture I took so let me show you a zoomed-out view. 
 
+<div class="figure">
 ![Overview of Shibuya](/img/micro-infrastructure/image2.png)
+</div>
 
 The set of buildings in my first image exists a meer 2 blocks from the [second busiest train station in the world](https://en.wikipedia.org/wiki/Shibuya_Station) and minutes from the world-famous [Shibuya Crossing](https://en.wikipedia.org/wiki/Shibuya_Crossing). Having such a (relatively) self-sustaining ecosystem in the middle of a busy downtown core is the center of my fascination. 
 
 While theoretically M.I. shouldn't be specific to a region, I seem to find it's most prevalent in eastern countries such as Japan, Singapore, India, and Taiwan. My best guess as to the cause of this is zoning laws. All of these countries either have unique zoning laws when it comes to mixed residential and commercial or have zoning laws that are weakly enforced. This being said, while I tend to be most fascinated with the eastern examples of M.I., there are a few edge cases that I want to touch upon that are fairly western that hit the same notes as the ones previously mentioned.
 
 ### Compact living spaces
+<div class="figure">
 ![Tiny Homes](https://i.pinimg.com/originals/e1/8d/8c/e18d8c2b8a5f6e41b82345ade0d95b8b.jpg)
+</div>
 The recent surge of tiny homes that manage to fit living, working, and eating quarters in a small space that is often sub-500sqft fascinates me in the same way that M.I. does. By doing the same thing that I define as M.I. on an individual scale, the innovations and efficiency of packing that much functionality into a small space is a fascinating case of optimization.
 
 
@@ -39,16 +45,22 @@ The concept and terminology of Mini-cities is not a new one, although the use of
 
 ### Kowloon Walled City
 
+<div class="figure">
 ![Kowloon Walled City](/img/micro-infrastructure/image3.jpg)
+</div>
 
 If you're not familiar with the Kowloon Walled City, I would recommend reading up more about it after this as I will not be doing the scale of this project any justice. The Kowloon Walled City was a former Chinese military fort in Hong Kong following the Japanese occupation of Hong Kong. After the Japanese surrender in 1945, the fort became a location of refuge for citizens fleeing the Chinese Civil War. At its peak, the Kowloon Walled City had an estimated 33k people, a function municipal government, restaurants, clinics. Some units within the Kowloon Walled City even had electricity and plumbing, although this was significantly rarer. 
 
 ### Univeristy Campuses
+<div class="figure">
 ![UBC](/img/micro-infrastructure/image4.jpg)
+</div>
 
 Another example of what I would consider a mini-city is a typical university campus. For example, the University of British Columbia in Canada is a great example of a fully-sustainable city, technically within a city. However, one special thing about UBC is the campus is separated from the rest of the city by a large wooded area and actually requires a small drive (or longer bus/walk) to get to.
 
+<div class="figure">
 ![UBC Map](/img/micro-infrastructure/image5.png)
+</div>
 
 While this example isn't entirely true, in most University Campuses in the western world, campus infrastructure can range from a clinic to a full hospital, with most even having their own method power generation. Residences provide places for students to live, there are restaurants so students can eat, and often students can find work on campus. Aside from import and exports these campuses can be fully sustainable on their own.
 
@@ -56,7 +68,9 @@ While this example isn't entirely true, in most University Campuses in the weste
 
 Finally, an edge case I want to hit briefly is what I call "Emulated Cities". I won't describe these too much because they don't fit the definition as they're usually not functional, but ill provide a few small images to show my point.
 
+<div class="figure">
 !["emulated cities"](/img/micro-infrastructure/image6.png)
+</div>
 
 These are facilities that are modeled to look like cities however they tend to serve a secondary purpose, such as a retirement home, mall, or play-place for children.
 

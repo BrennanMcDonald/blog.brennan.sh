@@ -47,8 +47,10 @@ While Q != null
 endwhile
 ```
 ### ETC Formula
+<div class="figure">
 
 ![alt text](/img/ptpmrr/etc_formula.png "Logo Title Text 2")
+</div>
 
 ## Implemenetation
 
